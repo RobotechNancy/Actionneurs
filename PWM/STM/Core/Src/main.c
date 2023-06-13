@@ -22,6 +22,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "pwm.h"
+#include "can.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -93,7 +94,10 @@ int main(void)
   MX_TIM1_Init();
   MX_CAN1_Init();
   /* USER CODE BEGIN 2 */
-  PWM_start_timer(&htim1, TIM_CHANNEL_2);
+  configure_CAN(&hcan1, CAN_ADDR_ACTIONNEUR_E);
+  PWM_start_timer(TURBINE_CHANNEL);
+  PWM_start_timer(SERVO_BALL_CHANNEL);
+  PWM_start_timer(SERVO_BASKET_CHANNEL);
 
   /* USER CODE END 2 */
 
@@ -104,10 +108,6 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    PWM_set_count(&htim1, TIM_CHANNEL_2, 205);
-    HAL_Delay(2000);
-    PWM_set_count(&htim1, TIM_CHANNEL_2, 409);
-    HAL_Delay(2000);
   }
   /* USER CODE END 3 */
 }
