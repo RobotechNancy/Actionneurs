@@ -89,12 +89,8 @@ int main(void)
   MX_GPIO_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
-  EDF30_start(&htim1);
+  EDF30_start_timer(&htim1);
 
-  EDF30_set_cycle(&htim1, 0.5f);
-  HAL_Delay(4000);
-
-  EDF30_stop(&htim1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -102,7 +98,10 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+    EDF30_on(&htim1);
+    HAL_Delay(2000);
+    EDF30_off(&htim1);
+    HAL_Delay(2000);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

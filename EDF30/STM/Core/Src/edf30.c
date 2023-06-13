@@ -14,7 +14,7 @@
  *  @param i2c Généralement &htim1 (structure d'STM du timer configuré)
  *  @return Code d'erreur
  */
-int EDF30_start(TIM_HandleTypeDef *timer) {
+int EDF30_start_timer(TIM_HandleTypeDef *timer) {
     if (HAL_TIM_PWM_Start(timer, EDF30_CHANNEL) != HAL_OK)
         return EDF30_ERR_START;
 
@@ -27,8 +27,31 @@ int EDF30_start(TIM_HandleTypeDef *timer) {
  *  @param i2c Généralement &htim1 (structure d'STM du timer configuré)
  *  @return Code d'erreur
  */
-int EDF30_stop(TIM_HandleTypeDef *timer) {
-    return HAL_TIM_PWM_Stop(timer, EDF30_CHANNEL);
+int EDF30_stop_timer(TIM_HandleTypeDef *timer) {
+    if (HAL_TIM_PWM_Stop(timer, EDF30_CHANNEL) != HAL_OK)
+        return EDF30_ERR_STOP;
+
+    return 0;
+}
+
+
+/*!
+ * @brief Activer la turbine (cycle de travail à EDF30_ON_CYCLE)
+ *  @param timer Généralement &htim1 (structure d'STM du timer configuré)
+ *  @return Code d'erreur
+ */
+int EDF30_on(TIM_HandleTypeDef *timer) {
+    return EDF30_set_cycle(timer, EDF30_ON_CYCLE);
+}
+
+
+/*!
+ * @brief Désactiver la turbine (cycle de travail à EDF30_OFF_CYCLE)
+ * @param timer Généralement &htim1 (structure d'STM du timer configuré)
+ * @return
+ */
+int EDF30_off(TIM_HandleTypeDef *timer) {
+    return EDF30_set_cycle(timer, 0);
 }
 
 
