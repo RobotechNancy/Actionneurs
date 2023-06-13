@@ -7,8 +7,6 @@
  */
 
 #include <math.h>
-#include <string.h>
-
 #include "pca9685.h"
 
 
@@ -43,8 +41,10 @@ int PCA9685_write_data(I2C_HandleTypeDef *i2c, uint8_t reg, uint8_t *data, uint8
 	if (data_len < 0) return PCA_ERR_DATA_TOO_SMALL;
 	if( data_len > 4) return PCA_ERR_DATA_TOO_BIG;
 
+    int status;
+
 	for (uint8_t i=0; i < 4; i++)
-		if (PCA9685_write(i2c, reg, data[i]) != HAL_OK)
+		if ((status = PCA9685_write(i2c, reg, data[i])) != HAL_OK)
 			return status;
 
 	return HAL_OK;
@@ -72,7 +72,7 @@ int PCA9685_init(I2C_HandleTypeDef *i2c) {
 
 	// Calcul du diviseur pour avoir la fréquence voulue (cf. page 25)
 	uint8_t prescaler_val = (uint8_t) roundf(25000000.0f / (4096 * PCA_PRESCALER_FREQ)) - 1;
-	if (PCA9685_write(i2c, PCA_PRESCALER_REG, prescaler_val) != HAL_OK)
+	if (PCA9685_write(i2c, PCA_REG_PRESCALER, prescaler_val) != HAL_OK)
 		return PCA_ERR_INIT_PRESCALER;
 
 	// On désactive le sleep mode pour pouvoir piloter les servos (cf. page 14)
@@ -120,6 +120,6 @@ int PCA9685_set_cycle(I2C_HandleTypeDef *i2c, uint8_t channel, float duty_cycle)
 	if (duty_cycle < 0) return PCA_ERR_CYCLE_TOO_SMALL;
 	if (duty_cycle > 1) return PCA_ERR_CYCLE_TOO_BIG;
 
-	uint16_t points = (uint16_t) 200.0f*duty_cycle;
+	uint16_t points = (uint16_t) (200.0f*duty_cycle);
 	return PCA9685_set_pwm(i2c, channel, points);
 }
