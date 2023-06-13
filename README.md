@@ -19,7 +19,7 @@ L'adresse par défaut de la carte est 0x40, après avoir désactivé toutes les 
 |-----|---------|--------------------------------------------------------|--------|
 | 7   | RESTART | Redémarrage activé                                     | 0      |
 | 6   | EXTCLK  | Utilisation d'un clock externe                         | 0      |
-| 5   | AI      | Ecriture des registres avec incrémentation automatique | 0      |
+| 5   | AI      | Ecriture des registres avec incrémentation automatique | 1      |
 | 4   | SLEEP   | Mode veille, activé pour définir le prescaler          | 1      |
 | 3   | SUB1    | La carte ne réagit pas à la sous-adresse 1             | 0      |
 | 2   | SUB2    | La carte ne réagit pas à la sous-adresse 2             | 0      |

@@ -96,7 +96,7 @@ int main(void)
 
   // Initialisation et envoi d'un signal PWM
   PCA9685_init(&hi2c1);
-  PCA9685_set_pwm(&hi2c1, 0, 306);
+  PCA9685_set_cycle(&hi2c1, 0, 1);
 
   // Fin du trigger
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);

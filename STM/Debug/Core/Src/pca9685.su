@@ -1,6 +1,7 @@
 ../Core/Src/pca9685.c:14:10:map	16	static
 ../Core/Src/pca9685.c:26:5:PCA9685_write	32	static
-../Core/Src/pca9685.c:40:5:PCA9685_write_data	32	static
-../Core/Src/pca9685.c:59:5:PCA9685_init	24	static
-../Core/Src/pca9685.c:95:5:PCA9685_set_pwm	32	static
-../Core/Src/pca9685.c:116:5:PCA9685_set_cycle	32	static
+../Core/Src/pca9685.c:40:5:PCA9685_write_data	64	dynamic
+../Core/Src/pca9685.c:63:5:PCA9685_init	24	static
+../Core/Src/pca9685.c:99:5:PCA9685_turn_off	24	static
+../Core/Src/pca9685.c:115:5:PCA9685_set_pwm	32	static
+../Core/Src/pca9685.c:136:5:PCA9685_set_cycle	32	static
