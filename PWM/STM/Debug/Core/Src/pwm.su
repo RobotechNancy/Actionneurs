@@ -1,0 +1,6 @@
+../Core/Src/pwm.c:17:5:PWM_start_timer	16	static
+../Core/Src/pwm.c:30:5:PWM_stop_timer	16	static
+../Core/Src/pwm.c:43:5:PWM_on	16	static
+../Core/Src/pwm.c:53:5:PWM_off	16	static
+../Core/Src/pwm.c:64:5:PWM_set_count	24	static
+../Core/Src/pwm.c:85:5:PWM_set_cycle	24	static

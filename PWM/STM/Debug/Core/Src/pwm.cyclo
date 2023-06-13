@@ -1,0 +1,6 @@
+pwm.c:17:5:PWM_start_timer	2
+pwm.c:30:5:PWM_stop_timer	2
+pwm.c:43:5:PWM_on	1
+pwm.c:53:5:PWM_off	1
+pwm.c:64:5:PWM_set_count	6
+pwm.c:85:5:PWM_set_cycle	3

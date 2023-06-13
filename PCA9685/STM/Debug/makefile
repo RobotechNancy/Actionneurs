@@ -34,34 +34,34 @@ $(wildcard ../makefile.init) \
 $(wildcard ../makefile.targets) \
 
 
-BUILD_ARTIFACT_NAME := actionneurs
+BUILD_ARTIFACT_NAME := PCA9685
 BUILD_ARTIFACT_EXTENSION := elf
 BUILD_ARTIFACT_PREFIX :=
 BUILD_ARTIFACT := $(BUILD_ARTIFACT_PREFIX)$(BUILD_ARTIFACT_NAME)$(if $(BUILD_ARTIFACT_EXTENSION),.$(BUILD_ARTIFACT_EXTENSION),)
 
 # Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
-actionneurs.elf \
+PCA9685.elf \
 
 MAP_FILES += \
-actionneurs.map \
+PCA9685.map \
 
 SIZE_OUTPUT += \
 default.size.stdout \
 
 OBJDUMP_LIST += \
-actionneurs.list \
+PCA9685.list \
 
 
 # All Target
 all: main-build
 
 # Main-build Target
-main-build: actionneurs.elf secondary-outputs
+main-build: PCA9685.elf secondary-outputs
 
 # Tool invocations
-actionneurs.elf actionneurs.map: $(OBJS) $(USER_OBJS) /home/mrspaar/Projects/Robotech/Actionneurs/STM/STM32L432KCUX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "actionneurs.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/mrspaar/Projects/Robotech/Actionneurs/STM/STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="actionneurs.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+PCA9685.elf PCA9685.map: $(OBJS) $(USER_OBJS) /home/mrspaar/Projects/Robotech/Actionneurs/PCA9685/STM/STM32L432KCUX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "PCA9685.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/mrspaar/Projects/Robotech/Actionneurs/PCA9685/STM/STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="PCA9685.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -70,14 +70,14 @@ default.size.stdout: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
 	@echo 'Finished building: $@'
 	@echo ' '
 
-actionneurs.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "actionneurs.list"
+PCA9685.list: $(EXECUTABLES) makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-objdump -h -S $(EXECUTABLES) > "PCA9685.list"
 	@echo 'Finished building: $@'
 	@echo ' '
 
 # Other Targets
 clean:
-	-$(RM) actionneurs.elf actionneurs.list actionneurs.map default.size.stdout
+	-$(RM) PCA9685.elf PCA9685.list PCA9685.map default.size.stdout
 	-@echo ' '
 
 secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST)
