@@ -36,11 +36,7 @@ L'adresse par défaut de la carte est 0x40, après avoir désactivé toutes les 
 | 2     | OUTDRV  | Les sorties sont en mode open-drain          | 0      |
 | 1 - 0 | OUTNE0  | Voir page 16 de la datasheet                 | 0      |
 
-- Prescaler (Registre 0xFE) : 0x79
-
-On calcule le diviseur pour avoir une fréquence de 50Hz :
-
-<img src="https://latex.codecogs.com/gif.latex?D=\frac{25MHz}{4096\times0x79}-1=50Hz" title="O_t=\frac{25MHz}{4096\times(0x79+1)}=50Hz" />
+- Prescaler (Registre 0xFE) : 0x79 pour 50Hz ($D = \frac{25MHz}{4096*50Hz} - 1 \approx 121 = 0\textrm{x}79$)
 
 ⚠️ Il faut ensuite désactiver le mode veille pour pouvoir contrôler les sorties PWM.
 
