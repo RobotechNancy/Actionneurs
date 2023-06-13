@@ -14,11 +14,16 @@
  *  @param i2c Généralement &htim1 (structure d'STM du timer configuré)
  *  @return Code d'erreur
  */
-int EDF30_init(TIM_HandleTypeDef *timer) {
+int EDF30_start(TIM_HandleTypeDef *timer) {
     if (HAL_TIM_PWM_Start(timer, EDF30_CHANNEL) != HAL_OK)
         return EDF30_ERR_START;
 
     return 0;
+}
+
+
+int EDF30_stop(TIM_HandleTypeDef *timer) {
+    return HAL_TIM_PWM_Stop(timer, EDF30_CHANNEL);
 }
 
 

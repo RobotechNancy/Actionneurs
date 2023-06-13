@@ -24,7 +24,9 @@
 #define EDF30_ERR_DUTY_CYCLE_TOO_LOW 0x05
 #define EDF30_ERR_DUTY_CYCLE_TOO_HIGH 0x06
 
-int EDF30_init(TIM_HandleTypeDef *timer);
+int EDF30_start(TIM_HandleTypeDef *timer);
+int EDF30_stop(TIM_HandleTypeDef *timer);
+
 int EDF30_set_pwm(TIM_HandleTypeDef *timer, uint16_t count);
 int EDF30_set_cycle(TIM_HandleTypeDef *timer, float duty_cycle);
 
