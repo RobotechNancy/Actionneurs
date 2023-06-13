@@ -89,22 +89,24 @@ int main(void)
   MX_GPIO_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
-  pca9685_handle_t handle = {
-      .i2c_handle = &hi2c1,
-      .device_address = PCA9865_I2C_DEFAULT_DEVICE_ADDRESS,
-      .inverted = false
-  };
-
-  pca9685_init(&handle);
+  HAL_Delay(1);
+  PCA9685_init(&hi2c1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  uint16_t i = 1;
+
   while (1)
   {
+	HAL_Delay(2);
+	PCA9685_set_pwm(&hi2c1, 0, 4095, 0);
+	i += 10;
+
+	if (i > 4095)
+		i = 1;
     /* USER CODE END WHILE */
-	pca9685_set_channel_duty_cycle(&handle, 1, 0.5f, false);
-	HAL_Delay(1000);
+
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

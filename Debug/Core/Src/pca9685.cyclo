@@ -1,10 +1,5 @@
-pca9685.c:57:13:pca9685_write_u8	1
-pca9685.c:63:13:pca9685_write_data	3
-pca9685.c:76:13:pca9685_read_u8	2
-pca9685.c:84:6:pca9685_init	2
-pca9685.c:111:6:pca9685_is_sleeping	1
-pca9685.c:125:6:pca9685_sleep	1
-pca9685.c:141:6:pca9685_wakeup	2
-pca9685.c:167:6:pca9685_set_pwm_frequency	3
-pca9685.c:196:6:pca9685_set_channel_pwm_times	1
-pca9685.c:211:6:pca9685_set_channel_duty_cycle	5
+pca9685.c:7:6:PCA9685_write	1
+pca9685.c:13:6:PCA9685_write_data	4
+pca9685.c:31:6:PCA9685_init	1
+pca9685.c:46:6:PCA9685_set_pwm	3
+pca9685.c:60:6:PCA9685_set_cycle	3
