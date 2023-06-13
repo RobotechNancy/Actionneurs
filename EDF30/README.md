@@ -25,7 +25,7 @@ La librairie contient les fonctions suivantes :
  *  @param i2c Généralement &htim1 (structure d'STM du timer configuré)
  *  @return Code d'erreur
  */
-int EDF30_start(TIM_HandleTypeDef *timer)
+int EDF30_start(TIM_HandleTypeDef *timer);
 
 
 /*!
@@ -33,7 +33,7 @@ int EDF30_start(TIM_HandleTypeDef *timer)
  *  @param i2c Généralement &htim1 (structure d'STM du timer configuré)
  *  @return Code d'erreur
  */
-int EDF30_stop(TIM_HandleTypeDef *timer)
+int EDF30_stop(TIM_HandleTypeDef *timer);
 
 
 /*!
@@ -42,7 +42,7 @@ int EDF30_stop(TIM_HandleTypeDef *timer)
  *  @param count Valeur du compteur (0 à EDF30_PWM_MAX)
  *  @return Code d'erreur
  */
-int EDF30_set_pwm(TIM_HandleTypeDef *timer, uint16_t count)
+int EDF30_set_pwm(TIM_HandleTypeDef *timer, uint16_t count);
 
 
 /*!
@@ -51,5 +51,5 @@ int EDF30_set_pwm(TIM_HandleTypeDef *timer, uint16_t count)
  *  @param duty_cycle Cycle de travail (0 à 1)
  *  @return Code d'erreur
  */
-int EDF30_set_cycle(TIM_HandleTypeDef *timer, float duty_cycle)
+int EDF30_set_cycle(TIM_HandleTypeDef *timer, float duty_cycle);
 ```
