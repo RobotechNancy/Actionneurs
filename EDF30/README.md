@@ -18,6 +18,7 @@ Si vous votre clock est configurée différemment, vous devez modifier les varia
 - `EDF30_PWM_MAX ...` : Nombre de comptes maximum du timer
 - `EDF30_CHANNEL TIM_CHANNEL_x` : Channel utilisé pour le PWM
 
+La librairie contient les fonctions suivantes :
 ```c
 /*!
  *  @brief Démarrer le timer pour générer le PWM
