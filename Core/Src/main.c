@@ -94,10 +94,9 @@ int main(void)
   // Synchro externe pour le trigger de l'oscillo
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
 
-  // Initialisation et envoie d'un signal PWM
+  // Initialisation et envoi d'un signal PWM
   PCA9685_init(&hi2c1);
-  HAL_Delay(10);
-  PCA9685_set_pwm(&hi2c1, 0, 4091);
+  PCA9685_set_pwm(&hi2c1, 0, 306);
 
   // Fin du trigger
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);

@@ -1,5 +1,5 @@
-pca9685.c:7:6:PCA9685_write	1
-pca9685.c:12:6:PCA9685_write_data	3
-pca9685.c:26:6:PCA9685_init	1
-pca9685.c:43:6:PCA9685_set_pwm	3
-pca9685.c:55:6:PCA9685_set_cycle	4
+pca9685.c:22:6:PCA9685_write	1
+pca9685.c:28:6:PCA9685_write_data	3
+pca9685.c:43:6:PCA9685_init	1
+pca9685.c:60:6:PCA9685_set_pwm	3
+pca9685.c:72:6:PCA9685_set_cycle	4
