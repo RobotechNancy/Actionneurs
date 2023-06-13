@@ -60,8 +60,8 @@ all: main-build
 main-build: actionneurs.elf secondary-outputs
 
 # Tool invocations
-actionneurs.elf actionneurs.map: $(OBJS) $(USER_OBJS) /home/mrspaar/Projects/Robotech/Actionneurs/STM32L432KCUX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "actionneurs.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/mrspaar/Projects/Robotech/Actionneurs/STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="actionneurs.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+actionneurs.elf actionneurs.map: $(OBJS) $(USER_OBJS) /home/mrspaar/Projects/Robotech/Actionneurs/STM/STM32L432KCUX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "actionneurs.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"/home/mrspaar/Projects/Robotech/Actionneurs/STM/STM32L432KCUX_FLASH.ld" --specs=nosys.specs -Wl,-Map="actionneurs.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
