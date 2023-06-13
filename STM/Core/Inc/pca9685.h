@@ -11,21 +11,25 @@
 
 #include "stm32l4xx_hal.h"
 
-// Registres et constantes
+// Registres et constantes (cycles de 20ms, clock à 25MHz)
 
-#define PCA_I2C_ADDR        0x80   //          Adresse par défaut
-#define PCA_I2C_TIMEOUT     1      //          Durée du timeout
-#define PCA_PRESCALER_FREQ  46.0f  //          Fréquence voulue
+#define PCA_I2C_ADDR        0x80   //  Adresse par défaut
+#define PCA_I2C_TIMEOUT     1.0f   //  Durée du timeout
+#define PCA_PRESCALER_FREQ  46.0f  //  Fréquence voulue
 
-#define PCA_PWM_ZERO        0x133  // 1ms      Comptes calculés pour
-#define PCA_PWM_MAX         0x199  // 1.5ms    des cycles de 20ms et
-#define PCA_PWM_MIN         0xcd   // 2ms      un compteur 12 bits
+#define PCA_PWM_MIN_TIME    1.0f   // 205 pour un cycle de 20ms
+#define PCA_PWM_MAX_TIME    2.0f   // 409 pour un cycle de 20ms
+#define PCA_PWM_CYCLE_TIME  20.0f  // Fréquence de 50Hz
 
-#define PCA_REG_MODE1       0x00   //          Regarder la datasheet
-#define PCA_REG_MODE2       0x01   //          page 10 à 13 pour une
-#define PCA_REG_CHAN0_OFF_L 0x08   //          liste complète de tous
-#define PCA_REG_ALL_ON_L    0xfa   //          les registres
-#define PCA_REG_PRESCALER   0xfe   //
+#define PCA_PWM_MAX         ((uint16_t) (PCA_PWM_MAX_TIME/(PCA_PWM_CYCLE_TIME/4096)))
+#define PCA_PWM_MIN         ((uint16_t) (PCA_PWM_MIN_TIME/(PCA_PWM_CYCLE_TIME/4096)))
+#define PCA_PWM_RANGE       (PCA_PWM_MAX - PCA_PWM_MIN)
+
+#define PCA_REG_MODE1       0x00
+#define PCA_REG_MODE2       0x01
+#define PCA_REG_CHAN0_OFF_L 0x08
+#define PCA_REG_ALL_ON_L    0xfa
+#define PCA_REG_PRESCALER   0xfe
 
 // Codes d'erreur
 
@@ -46,6 +50,7 @@
 // Signatures des fonctions publiques
 
 int PCA9685_init(I2C_HandleTypeDef *i2c);
+int PCA9685_turn_off(I2C_HandleTypeDef *i2c, uint8_t channel);
 int PCA9685_set_pwm(I2C_HandleTypeDef *i2c, uint8_t channel, uint16_t on_count);
 int PCA9685_set_cycle(I2C_HandleTypeDef *i2c, uint8_t channel, float duty_cycle);
 

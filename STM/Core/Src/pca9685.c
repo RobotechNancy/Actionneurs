@@ -79,24 +79,39 @@ int PCA9685_init(I2C_HandleTypeDef *i2c) {
 	if (PCA9685_write(i2c, PCA_REG_MODE1, 0b00000000) != HAL_OK)
 		return PCA_ERR_INIT_WAKEUP;
 
-	HAL_Delay(2);
+    // On attend au moins 500us pour que l'oscillateur se stabilise
+	HAL_Delay(1);
 	return 0;
 }
 
+
+/*!
+ *  @brief Désactiver un channel
+ *  @param i2c Généralement &hi2c1 (structure d'STM pour gérer l'I2C)
+ *  @param channel Le channel à désactiver (0 à 15)
+ *  @return Un code d'erreur
+ */
+int PCA9685_turn_off(I2C_HandleTypeDef *i2c, uint8_t channel) {
+    if (channel < 0) return PCA_ERR_CHAN_TOO_SMALL;
+    if (channel > 16) return PCA_ERR_CHAN_TOO_BIG;
+
+    uint8_t data[2] = {0x00, 0x10};
+    return PCA9685_write_data(i2c, PCA_REG_CHAN0_OFF_L + channel*4, data, 2);
+}
 
 
 /*!
  *  @brief Directement définir la valeur du PWM
  *  @param i2c Généralement &hi2c1 (structure d'STM pour gérer l'I2C)
  *  @param channel Le servomoteur à contrôler (0 à 15)
- *  @param points Le nombre de points ON (0 à 200)
+ *  @param points Le nombre de points ON (0 à PCA_PWM_RANGE)
  *  @return Un code d'erreur
  */
 int PCA9685_set_pwm(I2C_HandleTypeDef *i2c, uint8_t channel, uint16_t points) {
 	if (channel < 0) return PCA_ERR_CHAN_TOO_SMALL;
 	if (channel > 16) return PCA_ERR_CHAN_TOO_BIG;
 
-	uint16_t on_count = map(points, 0, 200, PCA_PWM_MIN, PCA_PWM_MAX);
+	uint16_t on_count = map(points, 0, PCA_PWM_RANGE, PCA_PWM_MIN, PCA_PWM_MAX);
 
 	if (on_count > PCA_PWM_MAX) return PCA_ERR_COUNT_TOO_BIG;
 	if (on_count < PCA_PWM_MIN) return PCA_ERR_COUNT_TOO_SMALL;
@@ -120,6 +135,6 @@ int PCA9685_set_cycle(I2C_HandleTypeDef *i2c, uint8_t channel, float duty_cycle)
 	if (duty_cycle < 0) return PCA_ERR_CYCLE_TOO_SMALL;
 	if (duty_cycle > 1) return PCA_ERR_CYCLE_TOO_BIG;
 
-	uint16_t points = (uint16_t) (200.0f*duty_cycle);
+	uint16_t points = (uint16_t) (duty_cycle*PCA_PWM_RANGE);
 	return PCA9685_set_pwm(i2c, channel, points);
 }
