@@ -12,8 +12,8 @@
 
 
 // Identique à Arduino : https://www.arduino.cc/reference/en/language/functions/math/map/
-uint16_t map(uint16_t x, uint16_t in_min, uint16_t in_max, uint16_t out_min, uint16_t out_max) {
-  return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+uint16_t map(float x, float in_min, float in_max, float out_min, float out_max) {
+  return (uint16_t) ((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min);
 }
 
 
@@ -113,7 +113,7 @@ int PCA9685_turn_off(I2C_HandleTypeDef *i2c, uint8_t channel) {
  *  @param points Le nombre de points ON (0 à PCA_PWM_RANGE)
  *  @return Un code d'erreur
  */
-int PCA9685_set_pwm(I2C_HandleTypeDef *i2c, uint8_t channel, uint16_t points) {
+int PCA9685_set_pwm(I2C_HandleTypeDef *i2c, uint8_t channel, float points) {
 	if (channel < 0) return PCA_ERR_CHAN_TOO_SMALL;
 	if (channel > 16) return PCA_ERR_CHAN_TOO_BIG;
 

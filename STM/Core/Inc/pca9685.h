@@ -17,8 +17,8 @@
 #define PCA_I2C_TIMEOUT     1.0f   //  Durée du timeout
 #define PCA_PRESCALER_FREQ  46.0f  //  Fréquence voulue
 
-#define PCA_PWM_MIN_TIME    1.0f   // 205 pour un cycle de 20ms
-#define PCA_PWM_MAX_TIME    2.0f   // 409 pour un cycle de 20ms
+#define PCA_PWM_MIN_TIME    0.8f   // 205 pour un cycle de 20ms
+#define PCA_PWM_MAX_TIME    2.2f   // 409 pour un cycle de 20ms
 #define PCA_PWM_CYCLE_TIME  20.0f  // Fréquence de 50Hz
 
 #define PCA_PWM_MAX         ((uint16_t) (PCA_PWM_MAX_TIME/(PCA_PWM_CYCLE_TIME/4096)))
@@ -51,7 +51,7 @@
 
 int PCA9685_init(I2C_HandleTypeDef *i2c);
 int PCA9685_turn_off(I2C_HandleTypeDef *i2c, uint8_t channel);
-int PCA9685_set_pwm(I2C_HandleTypeDef *i2c, uint8_t channel, uint16_t on_count);
+int PCA9685_set_pwm(I2C_HandleTypeDef *i2c, uint8_t channel, float points);
 int PCA9685_set_cycle(I2C_HandleTypeDef *i2c, uint8_t channel, float duty_cycle);
 
 

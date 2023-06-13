@@ -1,7 +1,7 @@
-pca9685.c:14:10:map	1
-pca9685.c:26:5:PCA9685_write	1
-pca9685.c:40:5:PCA9685_write_data	2
-pca9685.c:63:5:PCA9685_init	6
-pca9685.c:99:5:PCA9685_turn_off	2
-pca9685.c:115:5:PCA9685_set_pwm	4
-pca9685.c:136:5:PCA9685_set_cycle	4
+pca9685.c:15:10:map	1
+pca9685.c:27:5:PCA9685_write	1
+pca9685.c:41:5:PCA9685_write_data	2
+pca9685.c:64:5:PCA9685_init	6
+pca9685.c:100:5:PCA9685_turn_off	2
+pca9685.c:116:5:PCA9685_set_pwm	4
+pca9685.c:137:5:PCA9685_set_cycle	4

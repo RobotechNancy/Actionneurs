@@ -31,7 +31,6 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define SERVO_COUNT 3
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -43,7 +42,6 @@
 I2C_HandleTypeDef hi2c1;
 
 /* USER CODE BEGIN PV */
-uint8_t activeServo;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -96,10 +94,13 @@ int main(void)
 
   // Initialisation et envoi d'un signal PWM
   PCA9685_init(&hi2c1);
-  PCA9685_set_cycle(&hi2c1, 0, 1);
+  PCA9685_set_cycle(&hi2c1, 0, 1.0f);
 
   // Fin du trigger
   HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
+
+  float i = 0.0f;
+  float increment = 4.0f;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -107,7 +108,13 @@ int main(void)
 
   while (1)
   {
+    PCA9685_set_pwm(&hi2c1, 0, i);
+    i += increment;
 
+    if (i > PCA_PWM_RANGE || i < 0)
+      increment *= -1;
+
+    HAL_Delay(20);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
