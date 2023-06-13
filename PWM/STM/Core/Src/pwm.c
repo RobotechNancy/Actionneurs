@@ -16,7 +16,7 @@
  */
 int PWM_start_timer(TIM_HandleTypeDef *timer, uint32_t channel) {
     if (HAL_TIM_PWM_Start(timer, channel) != HAL_OK)
-        return EDF30_ERR_START;
+        return PWM_ERR_START;
 
     return 0;
 }
@@ -29,19 +29,19 @@ int PWM_start_timer(TIM_HandleTypeDef *timer, uint32_t channel) {
  */
 int PWM_stop_timer(TIM_HandleTypeDef *timer, uint32_t channel) {
     if (HAL_TIM_PWM_Stop(timer, channel) != HAL_OK)
-        return EDF30_ERR_STOP;
+        return PWM_ERR_STOP;
 
     return 0;
 }
 
 
 /*!
- * @brief Activer la turbine (cycle de travail à EDF30_ON_CYCLE)
+ * @brief Activer la turbine (cycle de travail à PWM_ON_CYCLE)
  *  @param timer Généralement &htim1 (structure d'STM du timer configuré)
  *  @return Code d'erreur
  */
 int PWM_on(TIM_HandleTypeDef *timer, uint32_t channel) {
-    return PWM_set_cycle(timer, channel, EDF30_ON_CYCLE);
+    return PWM_set_cycle(timer, channel, PWM_ON_CYCLE);
 }
 
 
@@ -58,12 +58,12 @@ int PWM_off(TIM_HandleTypeDef *timer, uint32_t channel) {
 /*!
  *  @brief Définir directement le cycle de travail du PWM
  *  @param timer Généralement &htim1 (structure d'STM du timer configuré)
- *  @param count Valeur du compteur (0 à EDF30_PWM_MAX)
+ *  @param count Valeur du compteur (0 à PWM_MAX)
  *  @return Code d'erreur
  */
 int PWM_set_count(TIM_HandleTypeDef *timer, uint32_t channel, uint16_t count) {
-    if (count < EDF30_PWM_MIN) return EDF30_ERR_COUNT_TOO_LOW;
-    if (count > EDF30_PWM_MAX) return EDF30_ERR_COUNT_TOO_HIGH;
+    if (count < PWM_MIN) return PWM_ERR_COUNT_TOO_LOW;
+    if (count > PWM_MAX) return PWM_ERR_COUNT_TOO_HIGH;
 
     switch (channel) {
         case TIM_CHANNEL_1: timer->Instance->CCR1 = count; break;
@@ -83,8 +83,8 @@ int PWM_set_count(TIM_HandleTypeDef *timer, uint32_t channel, uint16_t count) {
  *  @return Code d'erreur
  */
 int PWM_set_cycle(TIM_HandleTypeDef *timer, uint32_t channel, float duty_cycle) {
-    if (duty_cycle < 0) return EDF30_ERR_DUTY_CYCLE_TOO_LOW;
-    if (duty_cycle > 1) return EDF30_ERR_DUTY_CYCLE_TOO_HIGH;
+    if (duty_cycle < 0) return PWM_ERR_DUTY_CYCLE_TOO_LOW;
+    if (duty_cycle > 1) return PWM_ERR_DUTY_CYCLE_TOO_HIGH;
 
-    return PWM_set_count(timer, channel, (uint16_t) (duty_cycle * EDF30_PWM_MAX));
+    return PWM_set_count(timer, channel, (uint16_t) (duty_cycle * PWM_MAX));
 }

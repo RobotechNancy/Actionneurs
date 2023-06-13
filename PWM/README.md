@@ -1,8 +1,5 @@
 # Turbines EDF30
 
-Montage : (A confirmer)
-![EDF30](EDF30.jpg)
-
 Paramétrage de la clock :
 - Clock utilisée : TIM1 (PA8)
 - Channel 1 : PWM Generation CH1

@@ -13,16 +13,16 @@
 #include "stm32l4xx_hal.h"
 
 
-#define EDF30_PWM_MIN  0
-#define EDF30_PWM_MAX  4095
-#define EDF30_ON_CYCLE 0.7f
+#define PWM_MIN  0
+#define PWM_MAX  4095
+#define PWM_ON_CYCLE 0.7f
 
-#define EDF30_ERR_START               0x01
-#define EDF30_ERR_STOP                0x02
-#define EDF30_ERR_COUNT_TOO_LOW       0x03
-#define EDF30_ERR_COUNT_TOO_HIGH      0x04
-#define EDF30_ERR_DUTY_CYCLE_TOO_LOW  0x05
-#define EDF30_ERR_DUTY_CYCLE_TOO_HIGH 0x06
+#define PWM_ERR_START               0x01
+#define PWM_ERR_STOP                0x02
+#define PWM_ERR_COUNT_TOO_LOW       0x03
+#define PWM_ERR_COUNT_TOO_HIGH      0x04
+#define PWM_ERR_DUTY_CYCLE_TOO_LOW  0x05
+#define PWM_ERR_DUTY_CYCLE_TOO_HIGH 0x06
 
 int PWM_start_timer(TIM_HandleTypeDef *timer, uint32_t channel);
 int PWM_stop_timer(TIM_HandleTypeDef *timer, uint32_t channel);
