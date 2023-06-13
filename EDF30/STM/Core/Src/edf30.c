@@ -22,6 +22,11 @@ int EDF30_start(TIM_HandleTypeDef *timer) {
 }
 
 
+/*!
+ *  @brief Arrêter le timer qui génère le PWM
+ *  @param i2c Généralement &htim1 (structure d'STM du timer configuré)
+ *  @return Code d'erreur
+ */
 int EDF30_stop(TIM_HandleTypeDef *timer) {
     return HAL_TIM_PWM_Stop(timer, EDF30_CHANNEL);
 }
