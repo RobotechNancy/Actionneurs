@@ -50,16 +50,24 @@ Pour contrôler une sortie, il faut d'abord modifier certaines valeurs dans `PCA
 | Numérique    | 125Hz              | 0.5ms            | 2.5ms            |
 | Numérique    | 250Hz              | 0.266ms          | 0.533ms          |
 
-Les comptes sont alors automatiquement calculés et stockés dans `PCA9685.h`.<br>
+Les comptes sont alors automatiquement calculés et stockés dans `PCA9685.h` :
+
+| Servo-moteur      | PCA_PWM_RANGE | PCA_PWM_MIN | PCA_PWM_MAX |
+|-------------------|---------------|-------------|-------------|
+| Analogique        | 204           | 205         | 409         |
+| Numérique (125Hz) | 1024          | 256         | 1280        |
+| Numérique (250Hz) | 273           | 272         | 545         |
+
 Après avoir initialisé la carte avec `PCA9685_init()`, on peut contrôler les sorties :
 
 ```c
-// Sortie 0 à 100% dans un sens (pour f=50Hz)
-PCA9685_set_pwm(&hi2c1, 0, 200);
+// Directement définir la valeur du PWM (0 à PCA_PWM_RANGE)
+int PCA9685_set_pwm(I2C_HandleTypeDef *i2c, uint8_t channel, uint16_t points)
 
-// Sortie 0 à zéro
+// Définir un cycle (de zéro à une fois PCA_PWM_RANGE)
+int PCA9685_set_cycle(I2C_HandleTypeDef *i2c, uint8_t channel, float duty_cycle)
 PCA9685_set_cycle(&hi2c1, 0, 0.5);
 
-// Désactiver la sortie 0
-PCA9685_turn_off(&hi2c1, 0);
+// Désactiver un channel (0 à 15)
+int PCA9685_turn_off(I2C_HandleTypeDef *i2c, uint8_t channel)
 ```
